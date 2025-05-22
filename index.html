@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundingPips - Professional Trading Platform</title>
+    <style>
+        :root {
+            --primary-color: #4060e0;
+            --dark-blue: rgb(2, 2, 57);
+            --darker-blue: rgb(3, 3, 79);
+            --light-blue: rgb(163, 163, 250);
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-blue);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 1rem 2rem;
+            gap: 2rem;
+        }
+
+        .nav-brand {
+            order: -1;
+        }
+
+        .nav-brand img {
+            height: 120px;
+            margin-left: 15%;
+            margin-top: -10%;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-left: 5%;
+            margin-top: -4%;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--white);
+            border: 1px solid var(--white);
+        }
+
+        .btn-lg {
+            padding: 0.8rem 0.9rem;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--white);
+            color: var(--dark-blue);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .hero-title {
+            text-align: center;
+            font-size: 7rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-top: 3%;
+        }
+
+        .hero-title-accent {
+            font-size: 7rem;
+            margin-top: -2%;
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 670px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .globe-background {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            z-index: 1;
+            opacity: 0.4;
+        }
+        .globe-background source {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .features {
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-top: -4rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: transparent;
+            border: 1px solid var(--light-blue);
+            border-radius: 10px;
+            padding: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            background-color: rgb(3, 3, 147);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-subtitle {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .journey {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .journey .section-title {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-top: 1rem;
+            margin: 2rem;
+        }
+
+        .section-subtitle {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .steps-nav,
+        .funding-options,
+        .amount-options {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: #151548;
+            padding: 0.5rem;
+            border-radius: 10px;
+            max-width: fit-content;
+            margin: 1rem auto;
+        }
+
+        .step-btn,
+        .funding-btn,
+        .amount-btn {
+            padding: 0.95rem 1.5rem;
+            border: none;
+            background: none;
+            color: var(--white);
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .step-btn.active,
+        .funding-btn.active,
+        .amount-btn.active {
+            background-color: var(--primary-color);
+        }
+
+        .step-btn:hover,
+        .funding-btn:hover,
+        .amount-btn:hover {
+            background-color: var(--white);
+            color: var(--dark-blue);
+        }
+
+        .evaluation {
+            padding: 4rem 2rem;
+        }
+
+        .eval-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1350px;
+            margin: 0 auto;
+            margin-top: -6rem;
+        }
+
+        .eval-card {
+            background-color: rgb(39, 39, 96);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .eval-card.master {
+            background-color: rgb(62, 62, 245);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-details {
+            list-style: none;
+        }
+
+        .card-details li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .terms-note {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .terms-note a {
+            color: #ccc;
+            text-decoration: underline;
+        }
+
+        .column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 170vmin;
+            height: 70vmin;
+            margin: 0 auto;
+        }
+
+        .column1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 190%;
+            height: 90%;
+        }
+
+        .card {
+            width: 95%;
+            height: 130%;
+            background-color: #131c85;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20%;
+        }
+
+        .card img {
+            width: 60%;
+            height: 110%;
+            border-radius: 20px;
+            margin-top: -20%;
+        }
+        .name h1{
+            margin-left: 33%;
+            margin-top: -20rem;
+            font-size: 5rem;
+        }
+        .name h3{
+            margin-left: 36%;
+            margin-top: -2rem;
+            font-size: 130%;
+        }
+        .ticker-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            background: transparent;
+            padding: 20px 0;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: scroll 15s linear infinite;
+            gap: 20px;
+        }
+
+        .country-card {
+            min-width: 320px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            color: white;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .country-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .flag {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .country-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .amount {
+            font-size: 36px;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .ticker-wrapper::after {
+            content: '';
+            display: block;
+            width: 20px;
+        }
+
+        .ticker-content {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer {
+            background-color: #131c85;
+            padding: 4rem 2rem 2rem;
+            margin-top: 12%;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1.7rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-col ul li a {
+            color: #d3d3d3;
+            text-decoration: none;
+        }
+
+        .footer-iso .iso-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-iso img {
+            width: 40px;
+            margin-right: 1rem;
+        }
+
+        .footer-iso p {
+            color: #d3d3d3;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links img {
+            width: 24px;
+            height: 24px;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links img:hover {
+            opacity: 0.8;
+        }
+
+        .ratings {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #fcd34d;
+        }
+
+        .ratings img {
+            height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+        }
+
+        /* New responsive styles - Mobile first approach */
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--white);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* Extra Small Devices (phones) */
+        @media (max-width: 576px) {
+            .navbar {
+                grid-template-columns: 1fr auto;
+                padding: 1rem;
+                position: relative;
+            }
+
+            .nav-brand {
+                order: 0;
+            }
+
+            .nav-brand img {
+                height: 70px;
+                margin-left: 0;
+                margin-top: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+                order: 1;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                flex-direction: column;
+                width: 80%;
+                height: 100vh;
+                background-color: var(--darker-blue);
+                padding: 6rem 2rem 2rem;
+                z-index: 90;
+                margin: 0;
+                gap: 1.5rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
+                width: 100%;
+                text-align: left;
+            }
+
+            .nav-actions {
+                position: fixed;
+                bottom: 2rem;
+                left: 2rem;
+                width: calc(80% - 4rem);
+                z-index: 91;
+                display: flex;
+                gap: 1rem;
+                flex-direction: column;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-actions.active {
+                transform: translateX(0);
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+                padding: 0.8rem;
+            }
+
+            /* Hero section */
+            .hero-title {
+                font-size: 2.5rem;
+                margin-top: 1rem;
+            }
+
+            .hero-title-accent {
+                font-size: 2.5rem;
+                margin-top: 0;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+                max-width: 280px;
+                margin: 0 auto;
+            }
+
+            /* Features section */
+            .features {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-top: 0;
+            }
+
+            .feature-card {
+                padding: 1.5rem;
+            }
+
+            /* Journey section */
+            .journey .section-title {
+                font-size: 2rem;
+                margin: 1rem 0;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .steps-nav,
+            .funding-options,
+            .amount-options {
+                flex-wrap: wrap;
+                padding: 0.4rem;
+            }
+
+            .step-btn,
+            .funding-btn,
+            .amount-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+                margin: 0.2rem;
+            }
+
+            .amount-options {
+                max-width: 90%;
+            }
+
+            /* Evaluation section */
+            .evaluation {
+                padding: 2rem 1rem;
+            }
+
+            .eval-cards {
+                grid-template-columns: 1fr;
+                margin-top: 0;
+            }
+
+            .eval-card {
+                padding: 1.5rem;
+            }
+
+            /* Column and name section */
+            .column {
+                width: 100%;
+                height: auto;
+                margin-top: 3rem;
+            }
+
+            .column1 {
+                width: 100%;
+                height: auto;
+            }
+
+            .card {
+                width: 90%;
+                height: auto;
+                padding: 2rem 0;
+                margin-top: 0;
+            }
+
+            .card img {
+                width: 80%;
+                height: auto;
+                margin-top: 0;
+            }
+
+            .name h1 {
+                margin-left: 0;
+                text-align: center;
+                font-size: 2.5rem;
+                margin-top: 2rem;
+            }
+
+            .name h3 {
+                margin-left: 0;
+                text-align: center;
+                font-size: 1rem;
+                margin-top: 0.5rem;
+            }
+
+            .name h4 {
+                margin-left: 0;
+                text-align: center;
+                margin-top: 1.5rem;
+            }
+
+            /* Ticker container */
+            .country-card {
+                min-width: 260px;
+                padding: 20px;
+            }
+
+            .amount {
+                font-size: 24px;
+            }
+
+            /* Footer */
+            .footer {
+                padding: 3rem 1rem 1.5rem;
+                margin-top: 6rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-col h4 {
+                margin-bottom: 1rem;
+            }
+
+            .footer-iso .iso-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: center;
+            }
+
+            .footer-iso img {
+                margin-bottom: 0.5rem;
+                margin-right: 0;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .ratings {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Small Devices (landscape phones, tablets) */
+        @media (min-width: 577px) and (max-width: 768px) {
+            .navbar {
+                grid-template-columns: auto 1fr auto;
+                padding: 1rem;
+            }
+
+            .nav-brand img {
+                height: 80px;
+                margin-left: 0;
+                margin-top: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+                order: 2;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                flex-direction: column;
+                width: 60%;
+                height: 100vh;
+                background-color: var(--darker-blue);
+                padding: 6rem 2rem 2rem;
+                z-index: 90;
+                margin: 0;
+                gap: 1.5rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-link {
+                font-size: 1.1rem;
+                padding: 0.5rem 0;
+            }
+
+            .nav-actions {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            /* Hero section */
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .hero-title-accent {
+                font-size: 4rem;
+            }
+
+            /* Features section */
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Column and name section */
+            .column {
+                width: 100%;
+                height: auto;
+            }
+
+            .column1 {
+                width: 100%;
+                height: auto;
+            }
+
+            .card {
+                width: 90%;
+                height: auto;
+                padding: 2rem 0;
+            }
+
+            .card img {
+                width: 70%;
+                height: auto;
+            }
+
+            .name h1 {
+                margin-left: 0;
+                text-align: center;
+                font-size: 3.5rem;
+                margin-top: 3rem;
+            }
+
+            .name h3 {
+                margin-left: 0;
+                text-align: center;
+                font-size: 1.2rem;
+            }
+
+            .name h4 {
+                margin-left: 0;
+                text-align: center;
+            }
+        }
+
+        /* Medium Devices (tablets, small laptops) */
+        @media (min-width: 769px) and (max-width: 992px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .nav-brand img {
+                height: 90px;
+                margin-left: 0;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                margin-left: 0;
+                margin-top: 0;
+            }
+
+            /* Hero section */
+            .hero-title {
+                font-size: 5rem;
+            }
+
+            .hero-title-accent {
+                font-size: 5rem;
+            }
+
+            /* Features section */
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            /* Column and name section */
+            .column {
+                width: 100%;
+                height: auto;
+            }
+
+            .column1 {
+                width: 100%;
+                height: auto;
+            }
+
+            .name h1 {
+                margin-left: 0;
+                text-align: center;
+                font-size: 4rem;
+                margin-top: 2rem;
+            }
+
+            .name h3 {
+                margin-left: 0;
+                text-align: center;
+            }
+
+            .name h4 {
+                margin-left: 0;
+                text-align: center;
+            }
+
+            /* Footer */
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Large Devices (desktops, large laptops) */
+        @media (min-width: 993px) and (max-width: 1200px) {
+            .nav-links {
+                gap: 2rem;
+                margin-left: 0;
+                margin-top: 0;
+            }
+
+            .hero-title, .hero-title-accent {
+                font-size: 6rem;
+            }
+        }
+
+        /* Additional responsive fixes for all screen sizes */
+        @media (max-width: 1200px) {
+            .globe-background {
+                width: 600px;
+                height: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .globe-background {
+                width: 400px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .globe-background {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 80;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Animation for menu toggle */
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(9px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="globe-background">
+      <source src="bg.mp4" type="video/mp4">
+    </div>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <img src="https://tradingonline.com/wp-content/uploads/2025/05/funding-pips.png" alt="FundingPips Logo"
+                class="logo">
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="#" class="nav-link">Home</a>
+            <a href="#" class="nav-link">Terms of use</a>
+            <a href="#" class="nav-link">About us</a>
+            <a href="#" class="nav-link">Affiliate Program</a>
+            <a href="#" class="nav-link">FAQ</a>
+        </div>
+        <div class="nav-actions" id="navActions">
+            <button class="btn btn-outline">Sign up</button>
+            <button class="btn btn-primary">Dashboard</button>
+        </div>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+
+    <main>
+        <section class="hero">
+            <h1 class="hero-title">
+                Build by traders
+                <span class="hero-title-accent">➔ for traders.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Join over 1,000,000 traders in the world's leading firm. Trade in a fully simulated
+                environment and earn up to 100% rewards.
+            </p>
+            <div class="hero-actions">
+                <button class="btn btn-primary btn-lg">Buy Challenge</button>
+                <button class="btn btn-outline btn-lg">Join Competition</button>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2 class="section-title">Why FundingPips?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✋</div>
+                    <p class="feature-subtitle">Zero Reward Denials.</p>
+                    <h3 class="feature-title">Trade with a peace of mind.</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👍</div>
+                    <p class="feature-subtitle">Your Favorite Platforms.</p>
+                    <h3 class="feature-title">MetaTrader 5, Match-Trader and cTrader.</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <p class="feature-subtitle">Flexible Reward Cycles.</p>
+                    <h3 class="feature-title">The choice is yours: weekly, bi-weekly or monthly.</h3>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🪙</div>
+                    <p class="feature-subtitle">We Grow Together.</p>
+                    <h3 class="feature-title">Trade up to $300,000 in simulated capital.</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="journey">
+            <h2 class="section-title">
+                Buckle Up, Your Journey<br>
+                Starts Here!
+            </h2>
+            <p class="section-subtitle">
+                We evaluate according to objectives that best fit your style. From beginners to experts,<br>
+                traders from 195+ countries trust our platform.
+            </p>
+
+            <div class="steps-nav">
+                <button class="step-btn">Zero</button>
+                <button class="step-btn">1 step</button>
+                <button class="step-btn active">2 step</button>
+            </div>
+
+            <div class="funding-options">
+                <button class="funding-btn">FundingPips</button>
+                <button class="funding-btn active">FundingPips Pro</button>
+            </div>
+
+            <div class="amount-options">
+                <button class="amount-btn">$5K</button>
+                <button class="amount-btn">$10K</button>
+                <button class="amount-btn">$25K</button>
+                <button class="amount-btn">$50K</button>
+                <button class="amount-btn active">$100K</button>
+            </div>
+        </section>
+
+        <section class="evaluation">
+            <div class="eval-cards">
+                <div class="eval-card">
+                    <h3>Evaluation Stage</h3>
+                    <div class="card-title">Student</div>
+                    <ul class="card-details">
+                        <li><span>Minimum Trading Days</span><span>3 days</span></li>
+                        <li><span>Maximum Daily Loss</span><span>5%</span></li>
+                        <li><span>Maximum Loss</span><span>10%</span></li>
+                        <li><span>Profit Target</span><span>$8,000 (8%)</span></li>
+                        <li><span>Leverage</span><span>1:100</span></li>
+                    </ul>
+                </div>
+
+                <div class="eval-card">
+                    <h3>Evaluation Stage</h3>
+                    <div class="card-title">Practitioner</div>
+                    <ul class="card-details">
+                        <li><span>Minimum Trading Days</span><span>3 days</span></li>
+                        <li><span>Maximum Daily Loss</span><span>5%</span></li>
+                        <li><span>Maximum Loss</span><span>10%</span></li>
+                        <li><span>Profit Target</span><span>$5,000 (5%)</span></li>
+                        <li><span>Leverage</span><span>1:100</span></li>
+                    </ul>
+                </div>
+
+                <div class="eval-card master">
+                    <div class="card-title">Master</div>
+                    <ul class="card-details">
+                        <li><span>Maximum Daily Loss</span><span>5%</span></li>
+                        <li><span>Maximum Loss</span><span>10%</span></li>
+                        <li><span>Leverage</span><span>1:100</span></li>
+                        <li><span>Rewards & Split</span><span>Flexible</span></li>
+                    </ul>
+                </div>
+            </div>
+            <p class="terms-note">
+                Please check <a href="#">Terms of Use</a> for detailed info
+            </p>
+        </section>
+
+        <section class="column">
+            <div class="column1">
+                <div class="card">
+                    <img src="https://fundingpips.com/_next/image?url=%2Fimgs%2Fpricecarousel%2Fglobe.png&w=1080&q=75" alt="">
+                </div>
+            </div>   
+        </section>
+        <div class="name">
+            <h1>$120+ Million</h1>
+            <h3>Earned by Traders Globally at FundingPips</h3>
+            <h4 style="margin-left: 40%;
+            margin-top: 3.5rem;
+            font-size: 100%;
+            color: rgb(171, 167, 167);">Quick and reliable. Zero reward denials.</h4>
+        </div>
+        <div class="ticker-container">
+            <div class="ticker-wrapper">
+                <div class="ticker-content">
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇮🇳</div>
+                            <span class="country-name">India</span>
+                        </div>
+                        <div class="amount">$46,646</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇰🇿</div>
+                            <span class="country-name">Kazakhstan</span>
+                        </div>
+                        <div class="amount">$45,312</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇺🇸</div>
+                            <span class="country-name">United States</span>
+                        </div>
+                        <div class="amount">$43,335</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇬🇧</div>
+                            <span class="country-name">United Kingdom</span>
+                        </div>
+                        <div class="amount">$41,892</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇩🇪</div>
+                            <span class="country-name">Germany</span>
+                        </div>
+                        <div class="amount">$39,567</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇨🇦</div>
+                            <span class="country-name">Canada</span>
+                        </div>
+                        <div class="amount">$38,421</div>
+                    </div>
+    
+                    <!-- Duplicate content for seamless loop -->
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇮🇳</div>
+                            <span class="country-name">India</span>
+                        </div>
+                        <div class="amount">$46,646</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇰🇿</div>
+                            <span class="country-name">Kazakhstan</span>
+                        </div>
+                        <div class="amount">$45,312</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇺🇸</div>
+                            <span class="country-name">United States</span>
+                        </div>
+                        <div class="amount">$43,335</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇬🇧</div>
+                            <span class="country-name">United Kingdom</span>
+                        </div>
+                        <div class="amount">$41,892</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇩🇪</div>
+                            <span class="country-name">Germany</span>
+                        </div>
+                        <div class="amount">$39,567</div>
+                    </div>
+    
+                    <div class="country-card">
+                        <div class="country-header">
+                            <div class="flag">🇨🇦</div>
+                            <span class="country-name">Canada</span>
+                        </div>
+                        <div class="amount">$38,421</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">Terms of Use</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Affiliate Program</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Community</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Brand Kit</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-iso">
+                <div class="iso-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/ISO_Logo.svg/1200px-ISO_Logo.svg.png"
+                        alt="ISO">
+                    <div>
+                        <p>ISO 27001:2022</p>
+                        <p>Information Security Management System - ISMS</p>
+                    </div>
+                </div>
+                <div class="iso-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/ISO_Logo.svg/1200px-ISO_Logo.svg.png"
+                        alt="ISO">
+                    <div>
+                        <p>ISO 22301:2019</p>
+                        <p>Business Continuity Management Systems - BCMS</p>
+                    </div>
+                </div>
+                <div class="iso-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/ISO_Logo.svg/1200px-ISO_Logo.svg.png"
+                        alt="ISO">
+                    <div>
+                        <p>ISO 9001:2015</p>
+                        <p>Quality Management System - QMS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="brand">FundingPips®</div>
+            <div class="social-links">
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+                <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="X"></a>
+            </div>
+            <div class="ratings">
+                <img src="search.png" alt="Google">
+                <span>4.7 / 5 ★★★★★</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Trustpilot_logo_2022.svg/2560px-Trustpilot_logo_2022.svg.png"
+                    alt="Trustpilot">
+                <span>22.9K reviews</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const navActions = document.getElementById('navActions');
+            const overlay = document.getElementById('overlay');
+            
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                navLinks.classList.toggle('active');
+                navActions.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            overlay.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                navActions.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+            
+            // Close menu when clicking on nav links
+            const navLinkElements = document.querySelectorAll('.nav-link');
+            navLinkElements.forEach(link => {
+                link.addEventListener('click', function() {
+                    menuToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    navActions.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
