@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FundingPips</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(2, 2, 57);
+        }
+        .video-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #bgVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        div p {
+            color: white;
+            margin-top: 1%;
+            padding: 1.5%;
+        }
+
+        .sign {
+            margin-left: 80%;
+            margin-top: -3%;
+        }
+
+        .sign button {
+            height: 45px;
+            width: 30%;
+            left: 6%;
+            margin-top: -10%;
+            margin-right: 67%;
+            border: 1px solid white;
+            color: white;
+            background-color: rgb(3, 3, 79);
+            border-radius: 15px;
+            font-size: large;
+        }
+
+        .sign button:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .dash button:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .dash button {
+            position: absolute;
+            top: 3.7%;
+            right: 5.2%;
+            height: 45px;
+            width: 8%;
+            border: 1px solid blue;
+            border-radius: 10px;
+            background-color: blue;
+            font-size: large;
+            color: white;
+        }
+
+        .img img {
+            width: 15%;
+            height: 2%;
+            margin-top: -6%;
+            margin-right: 75%;
+
+        }
+
+        .build h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 13%;
+            margin-left: 3%;
+            font-size: 700%;
+            font-weight: bolder;
+            color: white;
+            font-family: 'system-ui';
+        }
+
+        .for h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: -2%;
+            margin-left: 3%;
+            font-size: 700%;
+            font-weight: bolder;
+            color: white;
+            font-family: 'system-ui';
+        }
+
+        .p h4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: large;
+            font-weight: 200;
+            width: 50%;
+            margin-top: 1.5%;
+            margin-left: 4%;
+            font-family: 'system-ui';
+        }
+
+        .p1 h4 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: large;
+            font-weight: 200;
+            width: 50%;
+            margin-top: -0.7%;
+            margin-left: 2%;
+            font-family: 'system-ui';
+        }
+
+        .buy button {
+            color: white;
+            background-color: blue;
+            margin-top: 2%;
+            margin-right: 10%;
+            width: 10%;
+            font-size: 100%;
+            border: 1px solid blue;
+            border-radius: 10px;
+            height: 40px;
+        }
+
+        .join button {
+            color: white;
+            background-color: rgb(2, 2, 73);
+            margin-top: -2.7%;
+            margin-left: 11%;
+            width: 10%;
+            font-size: 100%;
+            border: 1px solid white;
+            border-radius: 10px;
+            height: 40px;
+        }
+
+        .buy button:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .join button:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .why h2 {
+            color: white;
+            font-family: 'system-ui';
+            font-weight: 400;
+            margin-top: 5%;
+        }
+
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            max-width: 1430px;
+        }
+
+        .card {
+            border: 1px solid rgb(163, 163, 250);
+            border-radius: 10px;
+            padding: 40px;
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .icon {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+
+        .name1 {
+            color: rgb(106, 90, 205);
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .name2 {
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .card:hover {
+            background-color: rgb(3, 3, 147);
+            color: white;
+        }
+
+        .buckle h1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 10%;
+            font-size: 380%;
+            font-family: 'system-ui';
+            flex-direction: row;
+        }
+
+        .cont h4 {
+            color: white;
+            text-align: center;
+            font-family: 'system-ui';
+            font-weight: 100;
+            margin-top: 1%;
+        }
+
+        .step-navigation {
+            display: flex;
+            justify-content: center;
+            background-color: #151548;
+            border-radius: 10px;
+            padding: 5px;
+            max-width: 250px;
+            width: 100%;
+            margin-left: 39%;
+            margin-top: 4%;
+        }
+
+        .step-btn {
+            flex: 1;
+            padding: 10px 10px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .step-btn:hover:not(.active) {
+            background-color: white;
+            color: black;
+        }
+
+        .step-btn.active {
+            background-color: #4060e0;
+        }
+
+        .step-btn.active:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .funding {
+            display: flex;
+            justify-content: center;
+            background-color: #151548;
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 350px;
+            width: 100%;
+            margin-left: 35%;
+            margin-top: 1%;
+        }
+
+        .funds {
+            flex: 1;
+            padding: 10px 10px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .funds:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .funds.pro {
+            background-color: #4060e0;
+        }
+
+        .funds.pro:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .money {
+            display: flex;
+            justify-content: center;
+            background-color: #151548;
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 450px;
+            width: 100%;
+            margin-left: 32%;
+            margin-top: 1%;
+        }
+
+        .funder {
+            flex: 1;
+            padding: 10px 10px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .funder:hover {
+            background-color: white;
+            color: black;
+        }
+
+        .funder.active {
+            background-color: #4060e0;
+        }
+
+        .funder.active:hover {
+            background-color: white;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-wrapper">
+        <video id="bgVideo" autoplay muted loop playsinline>
+            <source src="bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div>
+        <p>Home</p>
+        <p>Terms of use</p>
+        <p>About us</p>
+        <p>Affiliate Program</p>
+        <p>FAQ</p>
+    </div>
+    <div class="img">
+        <img src="https://tradingonline.com/wp-content/uploads/2025/05/funding-pips.png" alt="img">
+    </div>
+    <div class="sign">
+        <button>Sign up</button>
+    </div>
+    <div class="dash">
+        <button>Dashboard</button>
+    </div>
+    <div class="build">
+        <h1>Build by traders</h1>
+    </div>
+    <div class="for">
+        <h1>➔ for traders.</h1>
+    </div>
+    <div class="p">
+        <h4>Join over 1,000,000 traders in the world's leading firm. Trade in a fully simulated</h4>
+    </div>
+    <div class="p1">
+        <h4>environment and earn up to 100% rewards.</h4>
+    </div>
+    <div class="buy">
+        <button>Buy Challenge</button>
+    </div>
+    <div class="join">
+        <button>Join Competition</button>
+    </div>
+    <div class="why">
+        <h2>Why FundingPips?</h2>
+    </div>
+    <div class="cards-container">
+        <div class="card">
+            <div class="icon">✋</div>
+            <div class="name1">Zero Reward Denials.</div>
+            <div class="name2">Trade with a peace of mind.</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">👍</div>
+            <div class="name1">Your Favorite Platforms.</div>
+            <div class="name2">MetaTrader 5, Match-Trader and cTrader.</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🏆</div>
+            <div class="name1">Flexible Reward Cycles.</div>
+            <div class="name2">The choice is yours: weekly, bi-weekly or monthly.</div>
+        </div>
+
+        <div class="card">
+            <div class="icon">🪙</div>
+            <div class="name1">We Grow Together.</div>
+            <div class="name2">Trade up to $300,000 in simulated capital.</div>
+        </div>
+    </div>
+    <div class="buckle">
+        <h1>Buckle Up, Your Journey
+            <br>
+            Starts here
+        </h1>
+    </div>
+    <div class="cont">
+        <h4>We evaluate according to objectives that best fit your style. From beginners to experts,
+            <br>
+            traders from 195+ countries trust our platform.
+        </h4>
+    </div>
+    <div class="step-navigation">
+        <div class="step-btn">Zero</div>
+        <div class="step-btn">1 step</div>
+        <div class="step-btn active">2 step</div>
+    </div>
+    <div class="funding">
+        <div class="funds">FundingPips</div>
+        <div class="funds pro">FundingPips Pro</div>
+    </div>
+    <div class="money">
+        <div class="funder">$5K</div>
+        <div class="funder">$10K</div>
+        <div class="funder">$25K</div>
+        <div class="funder">$50K</div>
+        <div class="funder active">$100K</div>
+    </div>
+
+</body>
+
+</html>
